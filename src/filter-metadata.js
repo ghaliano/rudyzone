@@ -10,9 +10,9 @@
 */
 
 /**
- * Remove special caracters fro a given string
+ * Remove special characters from given string
  * @param {string} str 
- * @returns {string} the escaped string without special caracters
+ * @returns {string} the escaped string without special characters
  */
 function cleanupQuery(str){
   return str.replace(/[`~!@#$%^&*()_|+\-=?;:'",.<>\{\}\[\]\\\/]/gi, '').toLowerCase();
