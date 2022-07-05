@@ -300,14 +300,7 @@ describe("get-metadata.js - getMetadata()", () => {
     });
   });
   test("Empty values - htmlExNoValues", () => {
-    expect(getMetadata(htmlExNoValues)).toEqual({
-      url: "",
-      title: "",
-      description: "",
-      keywords: [],
-      author: "",
-      siteName: "",
-    });
+    expect(getMetadata(htmlExNoValues)).toEqual(nullMetadata);
   });
   test("Nothing present - htmlExNothing", () => {
     expect(getMetadata(htmlExNothing)).toEqual(nullMetadata);

@@ -22,14 +22,25 @@ type Metadata = {
  * @param html The complete HTML document text to parse
  * @returns A Metadata object with data from the HTML <head>
  */
+
 export default function getMetadata(html) {
-  // TODO: delete and replace this with your code
+  
+  const parser = new DOMParser();
+  const xmlDoc = parser.parseFromString(html, "text/html");
+  const title = xmlDoc.getElementsByTagName("title")[0]?.innerHTML;
+  
+  const url = xmlDoc.querySelector("meta[property='og:url']");
+  const siteName = xmlDoc.querySelector("meta[property='og:site_name']");
+  const description = xmlDoc.querySelector("meta[property='og:description']");
+  const keywords = xmlDoc.querySelector("meta[name='keywords']");
+  const author = xmlDoc.querySelector("meta[name='author']");
+
   return {
-    url: "https://www.example.com/something/to-test",
-    siteName: "Example Site Name",
-    title: "Example Title",
-    description: "Example description.",
-    keywords: ["example", "keywords"],
-    author: "Example Author",
+    url: url?(url.attributes.content.value || null):null,
+    siteName: siteName?(siteName.attributes.content.value|| null):null,
+    title: title || null,
+    description:description?(description.attributes.content.value||null):null,
+    keywords:(keywords?.attributes.content.value)?keywords.attributes.content.value.split(','):null,
+    author: author?(author.attributes.content.value||null):null,
   };
 }
