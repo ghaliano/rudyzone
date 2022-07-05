@@ -14,7 +14,7 @@
  * @param {string} str 
  * @returns {string} the escaped string without special characters
  */
-function cleanupQuery(str){
+function cleanupQuery(str) {
   return str.replace(/[`~!@#$%^&*()_|+\-=?;:'",.<>\{\}\[\]\\\/]/gi, '').toLowerCase();
 }
 
@@ -32,26 +32,26 @@ function cleanupQuery(str){
  */
 
 export default function filterMetadata(metadatas, query) {
-  if (!Array.isArray(metadatas)){
+  if (!Array.isArray(metadatas)) {
     return [];
-  } else if(!query){
+  } else if (!query) {
     return metadatas;
   }
 
   return metadatas.filter(function (metadata) {
     for (let q of query.split(" ")) {
-      if (!q){
+      if (!q) {
         continue;
       }
       const cleanQuery = cleanupQuery(q);
       if (
-      (metadata.url && cleanupQuery(metadata.url).includes(cleanQuery))
-      || (metadata.siteName && cleanupQuery(metadata.siteName).includes(cleanQuery))
-      || (metadata.description && cleanupQuery(metadata.description).includes(cleanQuery))
-      || (metadata.title && cleanupQuery(metadata.title).includes(cleanQuery))
-      || (metadata.keywords && (metadata.keywords.includes(cleanQuery) || metadata.keywords.filter(value => q.includes(value)).length))
-      || (metadata.author && cleanupQuery(metadata.author).includes(cleanQuery))
-      ){
+        (metadata.url && cleanupQuery(metadata.url).includes(cleanQuery))
+        || (metadata.siteName && cleanupQuery(metadata.siteName).includes(cleanQuery))
+        || (metadata.description && cleanupQuery(metadata.description).includes(cleanQuery))
+        || (metadata.title && cleanupQuery(metadata.title).includes(cleanQuery))
+        || (metadata.keywords && (metadata.keywords.includes(cleanQuery) || metadata.keywords.filter(value => q.includes(value)).length))
+        || (metadata.author && cleanupQuery(metadata.author).includes(cleanQuery))
+      ) {
         return true;
       }
     }

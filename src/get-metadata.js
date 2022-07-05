@@ -24,11 +24,11 @@ type Metadata = {
  */
 
 export default function getMetadata(html) {
-  
+
   const parser = new DOMParser();
   const xmlDoc = parser.parseFromString(html, "text/html");
   const title = xmlDoc.getElementsByTagName("title")[0]?.innerHTML;
-  
+
   const url = xmlDoc.querySelector("meta[property='og:url']");
   const siteName = xmlDoc.querySelector("meta[property='og:site_name']");
   const description = xmlDoc.querySelector("meta[property='og:description']");
@@ -36,11 +36,11 @@ export default function getMetadata(html) {
   const author = xmlDoc.querySelector("meta[name='author']");
 
   return {
-    url: url?(url.attributes.content.value || null):null,
-    siteName: siteName?(siteName.attributes.content.value|| null):null,
+    url: url ? (url.attributes.content.value || null) : null,
+    siteName: siteName ? (siteName.attributes.content.value || null) : null,
     title: title || null,
-    description:description?(description.attributes.content.value||null):null,
-    keywords:(keywords?.attributes.content.value)?keywords.attributes.content.value.split(','):null,
-    author: author?(author.attributes.content.value||null):null,
+    description: description ? (description.attributes.content.value || null) : null,
+    keywords: (keywords?.attributes.content.value) ? keywords.attributes.content.value.split(',') : null,
+    author: author ? (author.attributes.content.value || null) : null,
   };
 }
